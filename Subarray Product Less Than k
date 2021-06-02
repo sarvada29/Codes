@@ -1,0 +1,28 @@
+//Given an array of integers nums and an integer k, return the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than k.
+
+//Solution
+
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+      int product=1;
+        int i=0;
+        int j=0;
+        int count=0;
+        while(i<nums.length){
+            product=product*nums[i];
+            if(product<k){
+                count=count+i-j+1;
+                i++;
+            }
+            else{
+                while(product>=k && j<=i){
+                     product=product/nums[j];
+                j++;
+                }
+                count=count+i-j+1;
+                i++;
+            }
+        }
+        return count;
+    }
+}
